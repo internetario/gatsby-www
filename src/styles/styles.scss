@@ -1,0 +1,54 @@
+// Setup
+@import 'config';
+@import 'queries';
+@import 'animations';
+
+// Normalize & Global
+@import 'normalize';
+@import 'webkit';
+@import 'typography';
+
+.multiple-sumome-warning-toast,
+.sumome-doctype-notice {
+  display: none;
+}
+
+body {
+  color: white;
+  overflow-x: hidden;
+}
+
+p {
+  margin-top: 0.38em;
+  margin-bottom: 0.61em;
+  min-height: 1em;
+}
+
+a,
+a:hover,
+a:visited,
+a:link {
+  text-decoration: underline;
+}
+
+section {
+  animation: fadeInDown 200ms ease;
+}
+
+.service {
+  margin: 2em 0;
+
+  li {
+    margin-bottom: 0.5em;
+  }
+
+  &-tag {
+    margin-right: 1em;
+    margin-bottom: 1em;
+  }
+}
+
+.services-stepper .service li {
+  margin-left: -5px;
+  padding-left: 5px;
+}

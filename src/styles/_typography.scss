@@ -1,0 +1,68 @@
+html {
+  @include media(xs) {
+    font-size: 16px;
+  }
+  @include media(sm) {
+    font-size: 17px;
+  }
+  @include media(md) {
+    font-size: 18px;
+  }
+  @include media(lg) {
+    font-size: 20px;
+  }
+}
+
+body,
+input,
+textarea {
+  font-family: $body;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  height: 100%;
+  line-height: 1.4;
+}
+
+p,
+li {
+  font-size: 1em;
+  line-height: 1.6em;
+}
+
+h1 {
+  margin-bottom: 1em;
+  font-size: 2em;
+  font-weight: 200;
+  line-height: 3em;
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 1em;
+  font-size: 1.4em;
+  font-weight: 500;
+  line-height: 1.7em;
+}
+
+h3 {
+  margin-bottom: 1em;
+  font-family: $title;
+  font-size: 1.4em;
+  font-weight: 300;
+  line-height: 1.5em;
+}
+
+h4 {
+  margin-bottom: 1em;
+  font-size: 1em;
+  line-height: 1.6em;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  width: 100%;
+}

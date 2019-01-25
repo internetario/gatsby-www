@@ -1,0 +1,21 @@
+@mixin media($breakpoint)
+  $mq-xs: "(max-width: 767px)"
+  $mq-sm: "(min-width: 768px) and (max-width: 991px)"
+  $mq-md: "(min-width: 992px) and (max-width: 1199px)"
+  $mq-lg: "(min-width: 1200px)"
+
+  @if $breakpoint == xs
+    @media #{$mq-xs}
+      @content
+
+  @if $breakpoint == sm
+    @media #{$mq-sm}
+      @content
+
+  @if $breakpoint == md
+    @media #{$mq-md}
+      @content
+
+  @if $breakpoint == lg
+    @media #{$mq-lg}
+      @content
