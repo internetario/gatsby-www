@@ -2,52 +2,56 @@ import * as React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 import { Language } from 'src/state'
 
-interface Service {
+interface Project {
   node: {
     lang: string
     data: {
+      customer: string
       title: {
         text: string
       }
-      description: {
+      featured_image: {
+        alt: string
+        url: string
+      }
+      content: {
         html: string
       }
-      examples: {
-        example_tag: string
-      }[]
     }
   }
 }
-type ServicesRenderer = (data: Service[]) => React.ReactNode
+type ProjectsRenderer = (data: Project[]) => React.ReactNode
 
-export const WithServices: React.SFC<{
-  render: ServicesRenderer
+export const WithProjects: React.SFC<{
+  render: ProjectsRenderer
 }> = ({ render }) => (
   <Language.Consumer>
     {({ selected = '' }) => (
       <StaticQuery
         render={data =>
           render(
-            data.services.edges.filter(
-              (edge: Service) => edge.node.lang.toLowerCase().indexOf(selected.toLowerCase()) >= 0
+            data.projects.edges.filter(
+              (edge: Project) => edge.node.lang.toLowerCase().indexOf(selected.toLowerCase()) >= 0
             )
           )
         }
         query={graphql`
           {
-            services: allPrismicService {
+            projects: allPrismicProject {
               edges {
                 node {
                   lang
                   data {
+                    customer
                     title {
                       text
                     }
-                    description {
-                      html
+                    featured_image {
+                      alt
+                      url
                     }
-                    examples {
-                      example_tag
+                    content {
+                      html
                     }
                   }
                 }

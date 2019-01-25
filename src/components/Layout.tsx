@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Logo } from 'src/components/Logo'
 
-const ratio = 38.1966
+export const ratio = 38.1966
 
 export const Background: React.SFC = ({ children }) => (
   <div style={{ minHeight: '100vh', backgroundColor: '#000' }}>{children}</div>
@@ -10,7 +10,7 @@ export const Background: React.SFC = ({ children }) => (
 export const IndexCenteralizerContainer: React.SFC = ({ children }) => (
   <div
     style={{
-      margin: `${ratio}vh auto 0`,
+      margin: `${100 - ratio}vh auto 0`,
       padding: '0 0 5em',
       width: '61vw',
       minWidth: '290px',

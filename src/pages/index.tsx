@@ -14,7 +14,8 @@ import {
   Background,
   IndexCenteralizerContainer,
   IndexSection,
-  LogoDecoration
+  LogoDecoration,
+  ratio
 } from '../components/Layout'
 
 import Stepper from '@material-ui/core/Stepper'
@@ -114,7 +115,7 @@ const IndexPage: React.SFC<{
       <Language.Consumer>
         {({ translate }) => (
           <IndexCenteralizerContainer>
-            <IndexSection style={{ textAlign: 'center', marginBottom: 'calc(61vh - 50px - 32px)' }}>
+            <IndexSection style={{ textAlign: 'center', marginBottom: `calc(${ratio}vh - 82px)` }}>
               <Logo />
             </IndexSection>
 
@@ -167,7 +168,7 @@ const IndexPage: React.SFC<{
               <GenericContact />
             </IndexSection>
 
-            <div style={{ color: '#222', top: 0, position: 'absolute', right: 5 }}>
+            <div style={{ top: 0, position: 'absolute', right: 5 }}>
               <PageLanguageFlags />
             </div>
           </IndexCenteralizerContainer>
