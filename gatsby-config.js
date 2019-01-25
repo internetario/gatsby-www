@@ -32,6 +32,12 @@ module.exports = {
         trackingId: 'UA-133163351-1'
       }
     },
+    {
+      resolve: '@wapps/gatsby-plugin-material-ui',
+      options: {
+        theme: require('./src/themes/dark')
+      }
+    },
     // https://www.gatsbyjs.org/packages/gatsby-plugin-google-tagmanager/
     {
       resolve: `gatsby-plugin-manifest`,
@@ -94,7 +100,6 @@ module.exports = {
         siteUrl: 'https://gatsby-starter-typescript-plus.netlify.com'
       }
     },
-    'gatsby-plugin-emotion',
     'gatsby-plugin-typescript',
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',

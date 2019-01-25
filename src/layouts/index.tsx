@@ -5,7 +5,7 @@ import { StaticQuery, graphql } from 'gatsby'
 import '../styles/styles.scss'
 
 import { Language, persistLanguage, getLanguage } from '../state'
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core'
 
 interface SiteMetadata {
   siteMetadata: {
@@ -167,52 +167,13 @@ class IndexProvider extends React.Component<
   }
 }
 
-const systemFonts = [
-  '-apple-system',
-  'BlinkMacSystemFont',
-  '"Segoe UI"',
-  'Roboto',
-  '"Helvetica Neue"',
-  'Arial',
-  'sans-serif',
-  '"Apple Color Emoji"',
-  '"Segoe UI Emoji"',
-  '"Segoe UI Symbol"'
-]
-
-const Theme = createMuiTheme({
-  palette: {
-    type: 'dark',
-    primary: {
-      light: '#444',
-      main: '#eee',
-      dark: '#eee',
-      contrastText: '#000'
-    }
-  },
-  shape: {
-    borderRadius: 0
-  },
-  overrides: {
-    MuiChip: {
-      root: {
-        borderRadius: 0
-      }
-    }
-  },
-  typography: {
-    useNextVariants: true,
-    fontFamily: ['Montserrat', ...systemFonts].join(','),
-    body2: {
-      fontSize: '1em'
-    }
-  }
-})
+const darkTheme = require('src/themes/dark.json')
+const MuiTheme = createMuiTheme(darkTheme)
 
 class IndexLayout extends React.Component {
   render() {
     return (
-      <MuiThemeProvider theme={Theme}>
+      <MuiThemeProvider theme={MuiTheme}>
         <StaticQuery
           render={data => (
             <IndexProvider site={data.site} languages={data.languages} {...this.props} />
