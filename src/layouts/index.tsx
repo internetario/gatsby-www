@@ -14,57 +14,74 @@ interface SiteMetadata {
   }
 }
 
+interface About {
+  data: {
+    title: {
+      text: string
+    }
+    content: {
+      html: string
+    }
+    meta_description: string
+    meta_keywords: string
+    cover_picture: {
+      url: string
+    }
+  }
+}
+
+type Translations = string | { html: string; text: string }
+
 interface LanguageQuery {
   edges: {
     node: {
       lang: string
       dataString: string
+      data: {
+        [key: string]: Translations
+      }
     }
   }[]
 }
 
 type StaticQueryProps = {
   site: SiteMetadata
+  about: About
   languages: LanguageQuery
 }
 
-class Index extends React.Component<{ site: SiteMetadata }> {
+class Index extends React.Component<{ site: SiteMetadata; about: About }> {
   shouldComponentUpdate() {
     return false
   }
 
   render() {
-    const { site, children } = this.props
+    const { site, about, children } = this.props
     return (
       <>
         <Helmet
           title={site.siteMetadata.title}
           meta={[
-            { name: 'description', content: site.siteMetadata.description },
-            { name: 'keywords', content: 'UX Design, UI Design, Startup' },
+            { name: 'description', content: about.data.meta_description },
+            { name: 'keywords', content: about.data.meta_keywords },
             {
               name: 'viewport',
               content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
             },
             { name: 'mobile-web-app-capable', content: 'yes' },
             { name: 'apple-mobile-web-app-capable', content: 'yes' },
-            { name: 'theme-color', content: '#0d3f69' },
-            {
-              name: 'google-site-verification',
-              content: 'tyqIB9AYeYgUsJ6f8vuhpeV2X4O7izAY730nI7WogsI'
-            },
+            { name: 'theme-color', content: '#000000' },
 
-            { property: 'og:url', content: 'http://7bits.cc/' },
+            { property: 'og:url', content: 'https://internetario.ga' },
             {
               property: 'og:title',
-              content: '7bits | Especialista em UX/UI Design'
+              content: about.data.title
             },
             {
               property: 'og:description',
-              content:
-                'Na 7bits, nós criamos valor através do design. Fazemos entrevistas, protótipos, testes de usabilidade, sempre com o objetivo de criar a melhor experiência.'
+              content: about.data.meta_description
             },
-            { property: 'og:image', content: 'http://i.imgur.com/35iCAFV.png' }
+            { property: 'og:image', content: about.data.cover_picture.url }
           ]}
         />
         {children}
@@ -75,7 +92,7 @@ class Index extends React.Component<{ site: SiteMetadata }> {
 
 interface Dictionaries {
   [lang: string]: {
-    [key: string]: string
+    [key: string]: Translations
   }
 }
 
@@ -98,13 +115,12 @@ class IndexProvider extends React.Component<
   }
 
   static dictionaries(languages: LanguageQuery = { edges: [] }): Dictionaries {
-    return languages.edges.reduce(
-      (map, { node: { lang, dataString } }) =>
-        Object.assign(map, {
-          [IndexProvider.languageCode(lang)]: JSON.parse(dataString)
-        }),
-      {}
-    )
+    return languages.edges.reduce((map, { node: { lang, data = {}, dataString } }) => {
+      const parsed = JSON.parse(dataString)
+      return Object.assign(map, {
+        [IndexProvider.languageCode(lang)]: Object.assign(parsed, data)
+      })
+    }, {})
   }
 
   state = IndexLayoutInitialState()
@@ -118,6 +134,12 @@ class IndexProvider extends React.Component<
   }
 
   public render() {
+    const indexChild = (
+      <Index about={this.props.about} site={this.props.site}>
+        {this.props.children}
+      </Index>
+    )
+
     if (this.props.languages) {
       return (
         <Language.Provider
@@ -128,21 +150,22 @@ class IndexProvider extends React.Component<
             translate: this.translate
           }}
         >
-          <Index site={this.props.site}>{this.props.children}</Index>
+          {indexChild}
         </Language.Provider>
       )
     }
 
-    return <Index site={this.props.site}>{this.props.children}</Index>
+    return indexChild
   }
 
-  private translate = (key: string): string => {
+  private translate = (key: string, to: 'text' | 'html' = 'text'): string => {
     const dictionaries = this.dictionary
     const language = this.state.language.value
     if (!dictionaries) return ''
     const current = dictionaries[language]
     if (!current) return ''
-    return current[key] || key
+    const hit = current[key] || key
+    return typeof hit === 'object' ? hit[to] : hit
   }
 
   private update(value: string) {
@@ -176,7 +199,12 @@ class IndexLayout extends React.Component {
       <MuiThemeProvider theme={MuiTheme}>
         <StaticQuery
           render={data => (
-            <IndexProvider site={data.site} languages={data.languages} {...this.props} />
+            <IndexProvider
+              site={data.site}
+              about={data.about}
+              languages={data.languages}
+              {...this.props}
+            />
           )}
           query={graphql`
             {
@@ -186,11 +214,34 @@ class IndexLayout extends React.Component {
                   description
                 }
               }
+              about: prismicAbout {
+                data {
+                  title {
+                    text
+                  }
+                  content {
+                    html
+                  }
+                  meta_description
+                  meta_keywords
+                  cover_picture {
+                    url
+                  }
+                }
+              }
               languages: allPrismicDictionary {
                 edges {
                   node {
                     lang
                     dataString
+                    data {
+                      portfolio_headline {
+                        html
+                      }
+                      be_a_partner_description {
+                        html
+                      }
+                    }
                   }
                 }
               }

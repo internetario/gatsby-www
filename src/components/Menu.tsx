@@ -1,5 +1,7 @@
 import * as React from 'react'
-import { StaticQuery, graphql } from 'gatsby'
+import { StaticQuery, graphql, navigate } from 'gatsby'
+import Button from '@material-ui/core/Button'
+import { Language } from 'src/state'
 
 interface Pages {
   node: {
@@ -27,4 +29,25 @@ export const WithPages: React.SFC<{
       }
     `}
   />
+)
+
+export const Menu: React.SFC = () => (
+  <Language.Consumer>
+    {({ translate }) => (
+      <WithPages
+        render={pages =>
+          pages.map(page => (
+            <Button
+              style={{ marginRight: '1em', marginBottom: '1em' }}
+              key={page.node.path}
+              variant="outlined"
+              onClick={() => navigate(page.node.path)}
+            >
+              {translate(page.node.path.replace(/[/]/g, ''))}
+            </Button>
+          ))
+        }
+      />
+    )}
+  </Language.Consumer>
 )

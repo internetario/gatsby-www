@@ -13,6 +13,7 @@ import { Back } from 'src/components/navigation/Back'
 import { WithProjects } from 'src/components/Project'
 import { GenericContact } from 'src/components/Contact'
 import { Language } from 'src/state'
+import { BeAPartner } from 'src/components/BeAPartner'
 
 const IndexPage: React.SFC<{}> = () => (
   <Background>
@@ -29,7 +30,10 @@ const IndexPage: React.SFC<{}> = () => (
             </IndexSection>
 
             <IndexSection>
-              <p style={{ marginBottom: '5em' }}>Colaboramos para o sucesso destes cases:</p>
+              <p
+                style={{ marginBottom: '5em' }}
+                dangerouslySetInnerHTML={{ __html: translate('portfolio_headline', 'html') }}
+              />
               <WithProjects
                 render={projects =>
                   projects.map((project, i) => (
@@ -54,9 +58,10 @@ const IndexPage: React.SFC<{}> = () => (
                         )}
                       </div>
 
-                      <p className="project-content">
-                        <div dangerouslySetInnerHTML={{ __html: project.node.data.content.html }} />
-                      </p>
+                      <div
+                        className="project-content"
+                        dangerouslySetInnerHTML={{ __html: project.node.data.content.html }}
+                      />
                     </div>
                   ))
                 }
@@ -65,10 +70,8 @@ const IndexPage: React.SFC<{}> = () => (
 
             <LogoDecoration text={'i'} />
 
-            <IndexSection style={{ textAlign: 'center' }}>
-              <h3>{translate('Seja um sócio')}</h3>
-              <p>Todo projeto de tecnologia precisa de responsáveis técnicos.</p>
-              <p>Você tem um projeto? Nós podemos trabalhar nisso juntos.</p>
+            <IndexSection>
+              <BeAPartner />
             </IndexSection>
 
             <LogoDecoration text={'o'} />

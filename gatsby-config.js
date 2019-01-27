@@ -1,12 +1,13 @@
 'use strict'
 const { linkResolverFactory } = require('./src/prismic')
+const siteUrl = 'https://internetario.ga'
 
 module.exports = {
   siteMetadata: {
     title: 'Internetario | Valorizar através de tecnologia',
     description:
       'O maior triunfo é construir a ponte entre seu negócio e a tecnologia. Sem firulas. A solução certa é a que leva ao sucesso o quanto antes, de forma sustentável e escalável.',
-    siteUrl: 'https://internetario.ga',
+    siteUrl,
     author: {
       name: 'Tiago Miranda',
       url: 'https://twitter.com/tiagosemoh',
@@ -14,7 +15,6 @@ module.exports = {
     }
   },
   plugins: [
-    // 37bits: custom
     `gatsby-plugin-sass`,
     {
       resolve: 'gatsby-source-prismic',
@@ -38,15 +38,14 @@ module.exports = {
         theme: require('./src/themes/dark')
       }
     },
-    // https://www.gatsbyjs.org/packages/gatsby-plugin-google-tagmanager/
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `7bits`,
-        short_name: `7bits`,
+        name: `Internetario`,
+        short_name: `Internetario`,
         start_url: `/`,
-        background_color: `#ffffff`,
-        theme_color: `#ffffff`,
+        background_color: `#000000`,
+        theme_color: `#000000`,
         display: `minimal-ui`,
         icon: `src/content/media/favicons/bold.png`
       }
@@ -96,9 +95,7 @@ module.exports = {
     'gatsby-transformer-json',
     {
       resolve: 'gatsby-plugin-canonical-urls',
-      options: {
-        siteUrl: 'https://gatsby-starter-typescript-plus.netlify.com'
-      }
+      options: { siteUrl }
     },
     'gatsby-plugin-typescript',
     'gatsby-plugin-sharp',

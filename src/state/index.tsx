@@ -17,5 +17,5 @@ export const Language = React.createContext({
   languages: ['pt'],
   selected: getLanguage(),
   setLanguage: persistLanguage,
-  translate: noop as (key: string) => string
+  translate: noop as (key: string, to?: 'text' | 'html') => string
 })

@@ -18,7 +18,7 @@ const IndexPage: React.SFC = () => (
             </IndexSection>
 
             <IndexSection>
-              <p>Looking forward to meet you.</p>
+              <p>{translate('contact_title')}</p>
               <GenericContact />
             </IndexSection>
           </CenteralizerContainer>

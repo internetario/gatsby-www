@@ -18,7 +18,7 @@ const IndexPage: React.SFC = () => (
         {({ translate }) => (
           <CenteralizerContainer>
             <IndexSection>
-              <p>Você enviou a mensagem.</p>
+              <p>{translate('contact_sent')}</p>
               <Back />
             </IndexSection>
 

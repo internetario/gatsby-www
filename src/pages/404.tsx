@@ -1,15 +1,19 @@
 import * as React from 'react'
-import { Link } from 'gatsby'
-
 import IndexLayout from 'src/layouts'
+import { Back } from 'src/components/navigation/Back'
+import { Background, CenteralizerContainer } from 'src/components/Layout'
 
 const NotFoundPage = () => (
-  <IndexLayout>
-    <h1>404: Page not found.</h1>
-    <p>
-      You've hit the void. <Link to="/">Go back.</Link>
-    </p>
-  </IndexLayout>
+  <Background>
+    <IndexLayout>
+      <CenteralizerContainer>
+        <h1>404: Página não encontrada.</h1>
+        <p>
+          <Back />
+        </p>
+      </CenteralizerContainer>
+    </IndexLayout>
+  </Background>
 )
 
 export default NotFoundPage
