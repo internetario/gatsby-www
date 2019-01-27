@@ -75,7 +75,7 @@ class Index extends React.Component<{ site: SiteMetadata; about: About }> {
             { property: 'og:url', content: 'https://internetario.ga' },
             {
               property: 'og:title',
-              content: about.data.title
+              content: about.data.title.text
             },
             {
               property: 'og:description',
