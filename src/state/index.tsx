@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { noop } from 'lodash'
 
-const SELECTED_LANG_KEY = 'ibits_lang'
+const SELECTED_LANG_KEY = 'irio_lang'
 
 export function persistLanguage(code: string): void {
   window.localStorage.setItem(SELECTED_LANG_KEY, code)

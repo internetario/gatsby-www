@@ -175,6 +175,7 @@ class IndexProvider extends React.Component<
   }
 
   private setLanguage = (value: string) => {
+    console.log('setLanguage', value)
     const language = IndexProvider.languageCode(value)
     persistLanguage(language)
     this.update(value)

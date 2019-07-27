@@ -14,11 +14,14 @@ interface About {
   }
 }
 
-const AboutSection = (data: { about: About }) => (
-  <>
-    <h2>{data.about.data.title.text}</h2>
-    <p dangerouslySetInnerHTML={{ __html: data.about.data.content.html }} />
-  </>
+const AboutSection = (props: { about: About }) => (
+  console.log(props.about.data),
+  (
+    <>
+      <h2>{props.about.data.title.text}</h2>
+      <p dangerouslySetInnerHTML={{ __html: props.about.data.content.html }} />
+    </>
+  )
 )
 
 export const About: React.SFC = () => (
@@ -26,7 +29,7 @@ export const About: React.SFC = () => (
     {({ selected }) => (
       <StaticQuery
         render={(data: { about: { edges: { node: About }[] } }) => {
-          console.log(data.about.edges, selected)
+          console.log(selected)
           const target = data.about.edges.find(
             ({ node }) => node.lang.toLowerCase().indexOf(selected.toLowerCase()) >= 0
           )
