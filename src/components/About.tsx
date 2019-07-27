@@ -26,6 +26,7 @@ export const About: React.SFC = () => (
     {({ selected }) => (
       <StaticQuery
         render={(data: { about: { edges: { node: About }[] } }) => {
+          console.log(data.about.edges, selected)
           const target = data.about.edges.find(
             ({ node }) => node.lang.toLowerCase().indexOf(selected.toLowerCase()) >= 0
           )
