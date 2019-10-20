@@ -1,4 +1,26 @@
-# gatsby-starter-typescript-plus
+# Internetario
+
+https://internetario.tech website, built with Gatsby, prismic.io, typescript and ♥
+
+## How to fork
+
+- [ ] Update `/gatsby-config.js` with your data
+- [ ] Update `/package.json` project name and description
+- [ ] Please, don't use by brand and design as is
+- [ ] If you can, publish your own website publically like this
+
+
+If you need my prismic setup just mail me
+
+tgcvmr@gmail.com
+
+👋
+
+---
+
+# Original readme from the template I used
+
+## gatsby-starter-typescript-plus
 
 > A starter kit for TypeScript-based Gatsby projects with sensible defaults.
 
