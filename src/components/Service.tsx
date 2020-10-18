@@ -81,7 +81,7 @@ export class ServicesSection extends React.Component<{}, { activeStep: number }>
 
   handleNext = (step?: number | null) => {
     this.setState(state => ({
-      activeStep: step || state.activeStep + 1
+      activeStep: step !== undefined && step != null ? step : state.activeStep + 1
     }))
   }
 
