@@ -25,36 +25,38 @@ const AboutSection = (props: { about: About }) => (
 )
 
 export const About: React.SFC = () => (
-  <Language.Consumer>
-    {({ selected }) => (
-      <StaticQuery
-        render={(data: { about: { edges: { node: About }[] } }) => {
-          console.log(selected)
-          const target = data.about.edges.find(
-            ({ node }) => node.lang.toLowerCase().indexOf(selected.toLowerCase()) >= 0
-          )
-          return target ? <AboutSection about={target.node} /> : null
-        }}
-        query={graphql`
-          {
-            about: allPrismicAbout {
-              edges {
-                node {
-                  lang
-                  data {
-                    title {
-                      text
-                    }
-                    content {
-                      html
-                    }
-                  }
+  <StaticQuery
+    render={(data: { about: { edges: { node: About }[] } }) => {
+      return (
+        <Language.Consumer>
+          {({ selected }) => {
+            console.log(selected)
+            const target = data.about.edges.find(
+              ({ node }) => node.lang.toLowerCase().indexOf(selected.toLowerCase()) >= 0
+            )
+            return target ? <AboutSection about={target.node} /> : null
+          }}
+        </Language.Consumer>
+      )
+    }}
+    query={graphql`
+      {
+        about: allPrismicAbout {
+          edges {
+            node {
+              lang
+              data {
+                title {
+                  text
+                }
+                content {
+                  html
                 }
               }
             }
           }
-        `}
-      />
-    )}
-  </Language.Consumer>
+        }
+      }
+    `}
+  />
 )

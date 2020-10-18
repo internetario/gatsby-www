@@ -1,6 +1,6 @@
 # Internetario
 
-https://internetario.tech website, built with Gatsby, prismic.io, typescript and ♥
+https://internetario.com website, built with Gatsby, prismic.io, typescript and ♥
 
 ## How to fork
 
@@ -8,7 +8,6 @@ https://internetario.tech website, built with Gatsby, prismic.io, typescript and
 - [ ] Update `/package.json` project name and description
 - [ ] Please, don't use by brand and design as is
 - [ ] If you can, publish your own website publically like this
-
 
 If you need my prismic setup just mail me
 
