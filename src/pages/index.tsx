@@ -62,7 +62,7 @@ const IndexPage: React.SFC = () => (
         <LogoDecoration text={'i'} />
 
         <IndexSection>
-          <div style={{ textAlign: 'center' }}>
+          <div>
             <h3>We are hiring</h3>
             <p>
               We are always hiring, leave us a link to your resumé so we can talk about how to build
@@ -70,7 +70,7 @@ const IndexPage: React.SFC = () => (
             </p>
 
             <Button
-              style={{ marginRight: '1em', marginBottom: '1em' }}
+              style={{ margin: '1em 0 0' }}
               variant="outlined"
               onClick={() => navigate('/jobs')}
             >
@@ -82,47 +82,49 @@ const IndexPage: React.SFC = () => (
         <LogoDecoration text={'-'} />
 
         <IndexSection>
+          <h3>Featured projects</h3>
           <Language.Consumer>
             {({ translate }) => (
               <p
                 id="featured-projects"
-                style={{ marginBottom: '5em' }}
+                style={{ marginBottom: '2em' }}
                 dangerouslySetInnerHTML={{ __html: translate('portfolio_headline', 'html') }}
               />
             )}
           </Language.Consumer>
-          <WithProjects
-            render={projects =>
-              projects.map((project, i) => (
-                <div key={i} className="project">
-                  <div className="project-title">
-                    <div>
-                      <h3>{project.node.data.title.text}</h3>
-                      <div>{project.node.data.customer}</div>
-                    </div>
 
-                    {project.node.data.featured_image.url && (
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gridAutoRows: 'auto',
+              gridGap: 16
+            }}
+          >
+            <WithProjects
+              render={projects =>
+                projects
+                  .filter(project => project.node.data.featured_image.url)
+                  .map((project, i) => (
+                    <div key={i} style={{ textAlign: 'left' }}>
                       <img
                         src={project.node.data.featured_image.url}
                         style={{
-                          float: 'right',
                           maxWidth: '56px',
                           maxHeight: '56px',
                           backgroundColor: 'white',
                           borderRadius: 8
                         }}
                       />
-                    )}
-                  </div>
-
-                  <div
-                    className="project-content"
-                    dangerouslySetInnerHTML={{ __html: project.node.data.content.html }}
-                  />
-                </div>
-              ))
-            }
-          />
+                      <div>
+                        <h4 style={{ marginBottom: 0 }}>{project.node.data.title.text}</h4>
+                        <div>{project.node.data.customer}</div>
+                      </div>
+                    </div>
+                  ))
+              }
+            />
+          </div>
         </IndexSection>
 
         <LogoDecoration text={'o'} />
